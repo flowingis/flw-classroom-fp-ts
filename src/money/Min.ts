@@ -1,8 +1,8 @@
 import * as Se from "fp-ts/Semigroup";
-import { MoneyEuro } from "./model";
+import { MoneyEuro, ofEuro } from "./model";
 
-export declare const Min: Se.Semigroup<MoneyEuro>;
+export const Min: Se.Semigroup<MoneyEuro> = {
+  concat: (x, y) => ofEuro(Math.min(x.amount, y.amount), x.currency),
+};
 
-export declare const MinAll: <MoneyEuro>(
-  S: Se.Semigroup<MoneyEuro>
-) => (startWith: MoneyEuro) => (as: readonly MoneyEuro[]) => MoneyEuro;
+export const MinAll = Se.concatAll(Min);

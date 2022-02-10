@@ -1,6 +1,15 @@
-import { Monoid } from "fp-ts/Monoid";
+import { concatAll, Monoid, struct } from "fp-ts/Monoid";
+import * as N from "fp-ts/number";
 import { MoneyEuro } from "./model";
 
-export declare const Sum: Monoid<MoneyEuro>;
+const MonoidCurrency = <C>(currency: C): Monoid<C> => ({
+  concat: () => currency,
+  empty: currency,
+});
 
-export declare const SumAll: (as: readonly MoneyEuro[]) => MoneyEuro;
+export const Sum: Monoid<MoneyEuro> = struct({
+  amount: N.MonoidSum,
+  currency: MonoidCurrency("€"),
+});
+
+export const SumAll = concatAll(Sum);

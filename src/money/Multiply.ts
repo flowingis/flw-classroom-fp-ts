@@ -1,6 +1,16 @@
-import { Monoid } from "fp-ts/Monoid";
-import { MoneyEuro } from "./model";
+import * as M from "fp-ts/Monoid";
+import * as N from "fp-ts/number";
+import * as Se from "fp-ts/Semigroup";
+import { MoneyEuro, ofEuro } from "./model";
 
-export declare const Multiply: Monoid<MoneyEuro>;
+const MultiplySemiGroup: Se.Semigroup<MoneyEuro> = Se.struct({
+  amount: N.SemigroupProduct,
+  currency: Se.constant("€"),
+});
 
-export declare const MultiplyAll: (as: readonly MoneyEuro[]) => MoneyEuro;
+export const Multiply: M.Monoid<MoneyEuro> = {
+  concat: MultiplySemiGroup.concat,
+  empty: ofEuro(1, "€"),
+};
+
+export const MultiplyAll = M.concatAll(Multiply);

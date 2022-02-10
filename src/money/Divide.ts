@@ -1,8 +1,10 @@
 import * as M from "fp-ts/Magma";
-import { MoneyEuro } from "./model";
+import { MoneyEuro, ofEuro } from "./model";
 
-export declare const Divide: M.Magma<MoneyEuro>;
+export const Divide: M.Magma<MoneyEuro> = {
+  concat: (x, y) => ofEuro(x.amount / y.amount, x.currency),
+};
 
-export declare const DivideAll: (
+export const DivideAll: (
   startWith: MoneyEuro
-) => (as: readonly MoneyEuro[]) => MoneyEuro;
+) => (as: readonly MoneyEuro[]) => MoneyEuro = M.concatAll(Divide);

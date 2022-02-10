@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
 import * as M from "../../src/money";
 
-describe.todo("Money Min", () => {
-  describe.todo("Min", () => {
+describe("Money Min", () => {
+  describe("Min", () => {
     test.each([
       [M.ofEuro(1, "€"), M.ofEuro(1, "€"), M.ofEuro(1, "€")],
       [M.ofEuro(10, "€"), M.ofEuro(20, "€"), M.ofEuro(10, "€")],
@@ -13,7 +13,7 @@ describe.todo("Money Min", () => {
     });
   });
 
-  describe.todo("MinAll", () => {
+  describe("MinAll", () => {
     test.each([
       [M.ofEuro(1, "€"), M.ofEuro(3, "€"), M.ofEuro(4, "€"), M.ofEuro(1, "€")],
       [
