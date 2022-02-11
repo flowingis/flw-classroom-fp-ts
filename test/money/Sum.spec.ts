@@ -14,7 +14,7 @@ describe("Money Sum", () => {
     });
   });
 
-  describe.todo("SumAll", () => {
+  describe("SumAll", () => {
     test.each([
       [
         M.ofEuro(1, "€"),

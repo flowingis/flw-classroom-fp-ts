@@ -1,4 +1,4 @@
-import { Monoid } from "fp-ts/Monoid";
+import { Monoid, concatAll } from "fp-ts/Monoid";
 import { MoneyEuro, ofEuro } from "./model";
 
 export const Sum: Monoid<MoneyEuro> = {
@@ -6,4 +6,4 @@ export const Sum: Monoid<MoneyEuro> = {
   concat: (x, y) => ofEuro(x.amount + y.amount, x.currency)
 }
 
-export declare const SumAll: (as: readonly MoneyEuro[]) => MoneyEuro;
+export const SumAll = concatAll(Sum)
